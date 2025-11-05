@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata - Mahasiswa Elektromedis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "⚡";
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.1;
+            top: -50px;
+            right: -50px;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.1); opacity: 0.15; }
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 6px solid #00d4ff;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            color: #00d4ff;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #0f2027;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #00d4ff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 1.5em;
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #00d4ff;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #0f2027;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            color: #2c5364;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 0.95em;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+            background: linear-gradient(135deg, #00d4ff 0%, #0f2027 100%);
+        }
+
+        .education-item, .experience-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #2c5364;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .education-item:hover, .experience-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .education-item h3, .experience-item h3 {
+            color: #0f2027;
+            margin-bottom: 8px;
+            font-size: 1.3em;
+        }
+
+        .education-item p, .experience-item p {
+            color: #2c5364;
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .hobby-section {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .hobby-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .hobby-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-10px);
+            border-color: #00d4ff;
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        .hobby-img {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            border: 3px dashed rgba(0, 212, 255, 0.5);
+            overflow: hidden;
+        }
+
+        .hobby-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .hobby-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+
+        .hobby-desc {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-btn:hover {
+            background: linear-gradient(135deg, #00d4ff 0%, #0f2027 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hobby-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="profile-img">👤</div>
+            <h1>Nama Lengkap Anda</h1>
+            <p>⚡ Mahasiswa Elektromedis | Medical Technology Enthusiast</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">📋</span>
+                    Data Pribadi
+                </h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Nama Lengkap</div>
+                        <div class="info-value">Nama Anda</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Tempat, Tanggal Lahir</div>
+                        <div class="info-value">Surabaya, 1 Januari 2000</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Jenis Kelamin</div>
+                        <div class="info-value">Laki-laki / Perempuan</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Agama</div>
+                        <div class="info-value">Islam</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Alamat</div>
+                        <div class="info-value">Jl. Contoh No. 123, Surabaya</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">No. Telepon</div>
+                        <div class="info-value">+62 812-3456-7890</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">email@example.com</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">NIM</div>
+                        <div class="info-value">123456789</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎓</span>
+                    Pendidikan
+                </h2>
+                <div class="education-item">
+                    <h3>Politeknik Kesehatan Surabaya</h3>
+                    <p><strong>D3 / D4 Teknologi Elektromedis</strong></p>
+                    <p>2021 - Sekarang | IPK: 3.75</p>
+                    <p>Mempelajari peralatan medis, elektronika medis, dan sistem instrumentasi medis</p>
+                </div>
+                <div class="education-item">
+                    <h3>SMA Negeri 1 Surabaya</h3>
+                    <p><strong>IPA</strong></p>
+                    <p>2018 - 2021</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">💼</span>
+                    Pengalaman Praktik & Organisasi
+                </h2>
+                <div class="experience-item">
+                    <h3>Praktik Kerja Lapangan (PKL)</h3>
+                    <p><strong>RSUD Dr. Soetomo Surabaya</strong></p>
+                    <p>Januari - Maret 2024</p>
+                    <p>Melakukan maintenance dan kalibrasi alat kesehatan seperti ECG, ventilator, dan patient monitor</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Anggota Himpunan Mahasiswa Elektromedis</h3>
+                    <p><strong>HIMATEL Poltekkes Surabaya</strong></p>
+                    <p>2022 - Sekarang</p>
+                    <p>Aktif dalam kegiatan seminar dan workshop teknologi kesehatan</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🔬</span>
+                    Pengalaman Praktikum
+                </h2>
+                <div class="experience-item">
+                    <h3>Praktikum Elektronika Dasar</h3>
+                    <p><strong>Semester 1</strong></p>
+                    <p>September - Desember 2021</p>
+                    <p>Mempelajari komponen elektronika, rangkaian dasar, dan penggunaan multimeter untuk mengukur tegangan, arus, dan resistansi. Membuat rangkaian seri-paralel dan memahami hukum Ohm.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Praktikum Anatomi Fisiologi</h3>
+                    <p><strong>Semester 2</strong></p>
+                    <p>Februari - Juni 2022</p>
+                    <p>Mempelajari sistem organ tubuh manusia, sistem kardiovaskular, respirasi, dan sistem saraf. Memahami dasar fisiologis yang penting untuk aplikasi alat elektromedis.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Praktikum Elektronika Analog & Digital</h3>
+                    <p><strong>Semester 2</strong></p>
+                    <p>Februari - Juni 2022</p>
+                    <p>Membuat rangkaian amplifier, oscillator, dan gerbang logika. Menggunakan IC Op-Amp dan memahami konversi sinyal analog ke digital yang penting untuk instrumentasi medis.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Praktikum Instrumentasi Medis</h3>
+                    <p><strong>Semester 3</strong></p>
+                    <p>September - Desember 2022</p>
+                    <p>Mempelajari prinsip kerja ECG, EEG, dan sensor biomedis. Melakukan pengukuran sinyal bioelektrik, kalibrasi sensor, dan analisis data menggunakan oscilloscope.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Praktikum Mikrokontroler & IoT Medis</h3>
+                    <p><strong>Semester 3</strong></p>
+                    <p>September - Desember 2022</p>
+                    <p>Pemrograman Arduino dan ESP32 untuk aplikasi kesehatan. Membuat sistem monitoring suhu tubuh dan detak jantung menggunakan sensor DHT22 dan pulse sensor dengan display LCD.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🛠️</span>
+                    Projek Elektromedis
+                </h2>
+                <div class="experience-item">
+                    <h3>Alat Pengukur Detak Jantung Digital</h3>
+                    <p><strong>Semester 1 - Projek Akhir Elektronika Dasar</strong></p>
+                    <p>Oktober - Desember 2021</p>
+                    <p>Membuat alat pengukur detak jantung menggunakan sensor pulse dan Arduino Uno dengan tampilan LCD 16x2. Alat dapat menampilkan BPM (Beat Per Minute) secara real-time dengan akurasi ±2 BPM.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Sistem Monitoring Suhu Tubuh Otomatis</h3>
+                    <p><strong>Semester 2 - Projek Kelompok</strong></p>
+                    <p>Maret - Juni 2022</p>
+                    <p>Merancang sistem monitoring suhu tubuh contactless menggunakan sensor MLX90614 dan Arduino. Dilengkapi alarm buzzer jika suhu >37.5°C dan data tersimpan di SD Card untuk tracking pasien.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Prototipe ECG (Elektrokardiografi) Sederhana</h3>
+                    <p><strong>Semester 3 - Projek Instrumentasi Medis</strong></p>
+                    <p>Oktober - Desember 2022</p>
+                    <p>Membuat prototipe ECG 3-lead menggunakan AD8232 sensor module. Sinyal jantung ditampilkan di Serial Plotter dan dapat dianalisis untuk mendeteksi pola detak jantung normal/abnormal.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Smart Patient Monitor IoT</h3>
+                    <p><strong>Semester 3 - Projek Akhir IoT Medis</strong></p>
+                    <p>November - Desember 2022</p>
+                    <p>Sistem monitoring pasien berbasis IoT menggunakan ESP32 yang mengukur suhu, detak jantung, dan saturasi oksigen (SpO2). Data dikirim ke aplikasi Blynk untuk monitoring jarak jauh secara real-time.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Alat Terapi TENS (Transcutaneous Electrical Nerve Stimulation)</h3>
+                    <p><strong>Semester 3 - Projek Kelompok</strong></p>
+                    <p>September - Desember 2022</p>
+                    <p>Merancang alat terapi TENS untuk mengurangi rasa nyeri menggunakan pulse generator dan elektroda. Frekuensi dan intensitas dapat diatur sesuai kebutuhan terapi dengan mode burst dan continuous.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">⚡</span>
+                    Keahlian Teknis
+                </h2>
+                <div class="skills">
+                    <span class="skill-tag">🔧 Elektronika Medis</span>
+                    <span class="skill-tag">🩺 Instrumentasi Medis</span>
+                    <span class="skill-tag">⚙️ Maintenance Alat Kesehatan</span>
+                    <span class="skill-tag">📊 Kalibrasi Peralatan Medis</span>
+                    <span class="skill-tag">💻 Mikrokontroler (Arduino)</span>
+                    <span class="skill-tag">🔌 Teknik Kelistrikan</span>
+                    <span class="skill-tag">📡 Sistem Sensor Biomedis</span>
+                    <span class="skill-tag">🛠️ Troubleshooting</span>
+                    <span class="skill-tag">📈 Analisis Sinyal Biomedis</span>
+                </div>
+            </div>
+
+            <div class="section hobby-section">
+                <h2 class="section-title" style="color: white; border-color: #00d4ff;">
+                    <span class="section-icon">⚽</span>
+                    Hobi & Minat
+                </h2>
+                <div class="hobby-grid">
+                    <div class="hobby-card">
+                        <div class="hobby-img">
+                            ⚽
+                            <!-- Ganti dengan: <img src="foto-futsal.jpg" alt="Futsal"> -->
+                        </div>
+                        <h3 class="hobby-title">Futsal</h3>
+                        <p class="hobby-desc">
+                            Aktif bermain futsal setiap weekend bersama teman-teman. Posisi favorit sebagai gelandang/midfielder. 
+                            Futsal mengajarkan teamwork dan strategi yang juga berguna dalam dunia medis.
+                        </p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-img">
+                            🏆
+                            <!-- Ganti dengan: <img src="foto-sepakbola.jpg" alt="Sepak Bola"> -->
+                        </div>
+                        <h3 class="hobby-title">Sepak Bola</h3>
+                        <p class="hobby-desc">
+                            Penggemar sepak bola sejak kecil. Mengikuti liga lokal dan internasional. 
+                            Olahraga ini membentuk kedisiplinan dan ketahanan fisik yang penting untuk profesi di bidang kesehatan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="mailto:email@example.com" class="social-btn">📧 Email</a>
+                <a href="#" class="social-btn">💼 LinkedIn</a>
+                <a href="#" class="social-btn">📱 WhatsApp</a>
+                <a href="#" class="social-btn">📷 Instagram</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
